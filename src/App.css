@@ -142,7 +142,8 @@ width: 8%;
   margin-bottom: 10px;
 }
 .pokemon-image{
-  width: 80%;
+  width: 85%;
+  height: 250px;
   transform: translate(10%,-35%);
 }
 .card-text{
