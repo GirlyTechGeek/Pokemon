@@ -12,39 +12,47 @@ import {
   Button,
   Stack,
   Badge,
+  Spinner,
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Endpoint from '../Components/Endpoint';
 import PokemonInfo from './PokemonInfo';
+import NavBar from './NavBar';
+import Loader from './Loader';
+import Card from './Card';
 
 function ListView() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const number = useState(0);
   const [pageNumber, setPageNumber] = useState('8');
   const [pokemonInfo, setPokemonInfo] = useState([]);
-  const [pokeData, setPokeData] = useState([])
+  const [pokeData, setPokeData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [url, setUrl] = useState(`${Endpoint}pokemon/?limit=${pageNumber}`);
   const [nxtUrl, setNxtUrl] = useState();
   const [prevUrl, setPrevUrl] = useState();
   const btnRef = React.useRef()
   useEffect(() => {
- 
     getPokemons();
   }, [url])
 
   const getPokemons = async () => {
+    setLoading(true);
     const res = await axios.get(url);
     setNxtUrl(res.data.next);
     setPrevUrl(res.data.previous);
     getPokemon(res.data.results);
-    console.log(pokeData);
+    setLoading(false);
+    setPageNumber(pageNumber);
+    // handleChange()
+    // console.log(pokeData);
   };
-  const nextPage = () =>{
-    setPageNumber( page => {
-      page = [ ...pageNumber, pageNumber + 2]
-      console.log(pageNumber)
-      return page;
-    })
+
+  const handleChange = (e) => {
+    // const{name, value} = e.target;
+    setPageNumber(e.target.value)
+    console.log(pageNumber)
   }
   const getPokemon = async (res) => {
     res.map(async (item) => {
@@ -57,73 +65,46 @@ function ListView() {
       })
     })
   }
- 
+
 
   return (
     <div className="Listview">
-      <Drawer
-        isOpen={isOpen}
-        placement='right'
-        onClose={onClose}
-        finalFocusRef={btnRef}
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
 
-        </DrawerContent>
-      </Drawer>
-      <nav className="shadow navbar navbar-expand-lg ">
-        <div className="container-fluid ">
-          <img className="navbar-brand" src={require('../assets/logo.png')} href="/" />
-          <div className='pokebook1'>
-            <span >Poké</span>
-            <span style={{ 'color': '#E85382' }}>book</span>
-          </div>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span>
-              <i className='fa fa-search'></i>
-            </span>
-          </button>
-          <div className='collapse navbar-collapse ' id='navbarText'>
-            <input className='nav-search'></input>
-            {/* <input  type="color" class="form-control form-control-color" value="#E85382" title="Choose your color" /> */}
-          </div>
-        </div>
-      </nav>
+      <NavBar></NavBar>
       <div className='bg-image'>
-        <div className='container list-page'>
-          <Button onClick={()=> {nextPage()}}>update</Button>
-          <div className='row'>
-            {pokeData &&
-              pokeData.map((item, i) =>
-                <div className='col-sm-3' id='page'> 
-                  <div class="card border-light shadow poke" key={item.id}  >
-                    <div class="card-body text-center" >
-                      <div className='pokemon-bg'>
-                        <img className="pokemon-image" src={item.sprites.front_default} />
-                      </div>
-                      <div className='text-center'>
-                        {/* <p class="card-text">Nam</p> */}
-                        <p class="card-text">{item.name}</p>
-                        {item.types.map((items) =>
-                          <>
-                            <span class="badge rounded-pill text-bg-light" style={{'marginRight':'10px'}}>{items.type.name}</span>
-                          </>
-                        )}
-                      </div>
-                      <div class="alert" role="alert" ref={btnRef} onClick={onOpen}>
-                        <span style={{ 'float': 'left' }}>View Pokemon</span>
-                        <i style={{ 'float': 'right' }} class="far fa-eye fa-eye"></i>
-                      </div>
-                    </div>
-                  </div>
-                
-                </div>
-              )}
-          </div>
-        </div>
+        {loading ? <Loader></Loader> :
+          <div className='container list-page'>
+            {/* <PokemonInfo data={pokemonInfo}></PokemonInfo> */}
+            <div className='row'>
+              <Card pokemon={pokeData} infoPokemon={poke => setPokemonInfo(poke)}></Card>
 
+              <div className='row'>
+                <div className='col-10'>
+                  <div className="btn-group ">
+                    {prevUrl && <button className='next-btn' onClick={() => {
+                      setPokeData([])
+                      setUrl(prevUrl)
+                    }}><i className='fas fa-arrow-left'></i></button>}
+
+                    {nxtUrl && <button className='next-btn' style={{ 'marginLeft': '20px' }} onClick={() => {
+                      setPokeData([])
+                      setUrl(nxtUrl)
+                    }}><i className='fas fa-arrow-right'></i></button>}
+
+                  </div>
+                </div>
+                <div className='col-2'>
+                  <select className="form-select-sm page-option" value={pageNumber} onChange={() => setPageNumber(pageNumber)} >
+                    <option value="8">8</option>
+                    <option value="12">12</option>
+                    <option value="18">18</option>
+                    <option value="24">24</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
       </div>
 
     </div>

@@ -11,10 +11,11 @@ function Intro() {
         </div>
         <h3 className='description'>Largest Pokemon index with information <br /> about every Pokemon you can think of.</h3>
         <input className='search-bar' placeholder='Enter pokemon name'></input>
-        <div class="search-bar-icon">
+        <div className="search-bar-icon">
+        <i className='fa fa-search' style={{'paddingTop':'10px'}}></i>
         </div>
         <div>
-          <a style={{ 'color': 'black' }} href='list-view'>View all</a>
+          <a style={{ 'color': 'black','textDecorationLine':'underline' }} href='list-view'>View all</a>
         </div>
       </div>
 

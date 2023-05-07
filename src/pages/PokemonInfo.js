@@ -1,16 +1,16 @@
 import '../App.css';
 import React from 'react';
 
-const PokemonInfo = ({pokemon}) => {
+const PokemonInfo = ({data}) => {
   return (
     <div className="info">
      
-{(!pokemon)? "" : (
+{(!data)? "" : (
   <div>
-  {pokemon.types.map(item =>{
+  {data.types.map(item =>{
     <>
-      <span class="badge rounded-pill text-bg-light">{item.type.name}</span>
-                    <span class="badge rounded-pill text-bg-light">Secondary</span>
+      <span className="badge rounded-pill text-bg-light">{item.type.name}</span>
+                    <span className="badge rounded-pill text-bg-light">Secondary</span>
     </>
   })}
   </div>

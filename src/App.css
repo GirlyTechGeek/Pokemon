@@ -8,7 +8,9 @@
 input:focus {
   outline: none !important;
 }
-
+select:focus {
+  outline: none !important;
+}
 .logo {
   width: 29%;
   margin-top: 5%;
@@ -90,7 +92,7 @@ input:focus {
 }
 
 /* media screen for main page */
-@media (width: 1000px) {
+@media (min-width: 769px) {
   .search-bar {
     width: 50%;
   }
@@ -99,7 +101,11 @@ input:focus {
     transform: translate(-720%, 150%);
   }
 }
-
+@media (min-width: 1025px) {
+  .search-bar-icon {
+    transform: translate(-1050%, 213%);
+  }
+}
 /* End of main page */
 /* ---------------------------------------------------- */
 /* ---------------------------------------------------- */
@@ -157,6 +163,7 @@ width: 8%;
   color: white;
   height: 50px;
   display: none;
+  cursor: pointer;
 }
 .poke:hover .alert {
   display: block;
@@ -170,7 +177,33 @@ width: 8%;
 .card{
  margin-bottom: 50px;
 }
+.spinner{
+  padding-top: 20%;
+}
+.page-option{
+  float: right;
+  width: 50px;
+  height: 40px;
+  background-color: white;
+  border: 1px solid rgb(165, 165, 165);
+  
+}
+.next-btn{
+  width: 50px;
+  height: 40px;
+  background-color: white;
+  border: 1px solid #E85382;
+  border-radius: 10px;
+}
+.next-btn:hover{
+  background-color: #E85382;
+  color: white;
+}
+
 @media (max-width: 768px) {
+  .App{
+    padding: 0px;
+  }
   .navbar-brand{
     transform: translate(0, 10%);
     width: 25%;
@@ -180,7 +213,6 @@ width: 8%;
       height: 50px;
      border-radius: 25px;
      margin-bottom: 10px;
-     margin-left: 20px;
     }
   .nav-search{
     width: 95%;
@@ -188,4 +220,54 @@ width: 8%;
   .list-page{
     padding-top: 30%;
   }
+}
+
+/* End of list page */
+/* ---------------------------------------------------- */
+/* ---------------------------------------------------- */
+
+/* Card page */
+
+.poke-gradient{
+  width: auto;
+  height: 35%;
+  background-color: aliceblue;
+  border-radius: 10px;
+  margin: 10px;
+ 
+}
+.mod-image{
+  
+}
+.tabs{
+background-color: #dcdcdc;
+width: 50%;
+margin-top: 5%;
+margin-left: 25%;
+margin-right: 25%;
+border-radius: 25px;
+padding: 5px;
+}
+.stat-name{
+
+text-align: right !important;
+}
+.tab{
+  width: 50%;
+}
+.tab-panel{
+  text-align: center;
+}
+.p{
+  margin-left: 40px;
+}
+@media (max-width: 768px) {
+  .tabs{
+    background-color: #dcdcdc;
+    width: 90%;
+    margin: 5% !important;
+    margin-top: 10% !important;
+    border-radius: 25px;
+    padding: 5px;
+    }
 }
