@@ -15,7 +15,8 @@ function ListView() {
   const [url, setUrl] = React.useState(`${Endpoint}pokemon/?limit=${pageNumber}`);
   const [nxtUrl, setNxtUrl] = useState();
   const [prevUrl, setPrevUrl] = useState();
-  const [getColor, setGetColor] = useState('#E85382')
+  const [getColor, setGetColor] = useState('#E85382');
+ 
   useEffect(() => {
     getPokemons();
   }, [url])

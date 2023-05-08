@@ -1,5 +1,5 @@
 import '../App.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Drawer,
     DrawerOverlay,
@@ -20,7 +20,64 @@ const Card = ({ pokemon, appear }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const btnRef = React.useRef();
     const [data, setData] = useState([]);
+    const icon = [
+        {
+            id: 'rock',
+            icon: 'fa fa-hand-rock-o',
+            'background-color': 'rgb(148, 81, 81)',
+        },
+        {
+            id: ' ghost',
+            icon: 'fab fa-snapchat-ghost',
+            color: 'rgb(247, 247, 247)',
+        },
+        {
+            id: ' electric',
+            color: 'rgb(255, 255, 161)',
+        },
+        {
+            id: '  bug',
+            icon: 'fa fa-bug',
+            color: '#F6D6A7',
+        },
+        {
+            id: '  poison',
+            icon: 'fas fa-skull',
+            color: ' #e0a7f6',
+        },
+        {
+            id: '  normal',
+            color: '#F4F4F4',
+        },
+        {
+            id: ' fairy',
+            icon: 'fas fa-pastafarianism',
+            color: 'rgba(255, 192, 203, 0.863)',
+        },
+        {
+            id: '  fire ',
+            icon: 'fas fa-fire',
+            color: '#FBE3DF',
+        },
+        {
+            id: '  grass',
+            icon: 'fa fa-leaf',
+            color: '#E2F9E1',
+        },
+        {
+            id: '  water',
+            icon: '	fas fa-water',
+            color: '#E0F1FD',
+        }
+    ];
+    const iconList = icon.map((i) =>
+        <i style={{ 'color': ` ${i.color}` }} className={i.icon}></i>
+    )
     const [bg, setBg] = useState('');
+
+    useEffect(() => {
+
+    })
     const handleOpen = (index) => {
         onOpen();
         getSimilarPokemon(index)
@@ -51,7 +108,9 @@ const Card = ({ pokemon, appear }) => {
                         <div className='text-center '>
                             <p className="card-text1">{data.name}</p>
                             {data.types?.map((items) =>
+
                                 <>
+
                                     <span className="badge rounded-pill badge " >{items.type.name}</span>
                                 </>
                             )}
@@ -151,10 +210,30 @@ const Card = ({ pokemon, appear }) => {
                                 <div className='text-center'>
                                     {/* <p class="card-text">Nam</p> */}
                                     <p className="card-text">{item.name}</p>
-                                    {item.types.map((items) =>
-                                        <>
-                                            <span className="badge rounded-pill text-bg-light" style={{ 'marginRight': '10px' }}>{items.type.name}</span>
+                                    {item.types.map((items) => {
+                                       return <>
+
+
+                                            <span className="badge rounded-pill text-bg-light" style={{ 'marginRight': '10px' }}>
+                                                {/* {
+                                                    icon.map((i, index) => { 
+                                                        return <>
+                                                        {
+                                                         i.id.push(id.icon) ? 
+                                                        <i key={index} style={{ 'color': ` ${i.color}` }} className={i.icon}></i>: ''
+
+                                                        }
+                                                        </>
+                                                       
+                                                    }
+
+                                                    )
+                                                } */}
+                                                {items.type.name}</span>
                                         </>
+                                    }
+
+
                                     )}
                                 </div>
                                 <div className="alert" style={{ 'backgroundColor': `${appear}` }} role="alert" ref={btnRef} onClick={() => handleOpen(item)}>

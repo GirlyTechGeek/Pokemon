@@ -11,7 +11,7 @@ function Intro() {
         </div>
         <h3 className='description'>Largest Pokemon index with information <br /> about every Pokemon you can think of.</h3>
         <input className='search-bar' placeholder='Enter pokemon name'></input>
-        <div className="search-bar-icon">
+        <div className="search-bar-icon" onClick={event =>  window.location.href='/list-view'}>
         <i className='fa fa-search' style={{'paddingTop':'10px'}}></i>
         </div>
         <div>
