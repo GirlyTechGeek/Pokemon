@@ -125,6 +125,27 @@ width: 8%;
   width: 50%;
   justify-content:center;
 }
+.theme{
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  /* background-color: #E85382; */
+  /* border: 1px solid gray; */
+}
+.theme1{
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  /* background-color: #53c8e8; */
+  margin-right: 20px;
+  margin-left: 20px;
+}
+.theme2{
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  /* background-color: #ebc63d; */
+}
 .form-control-color{
   border-radius: 25px;
 
@@ -145,12 +166,18 @@ width: 8%;
   width: 100%;
   background-color: rgba(204, 204, 204, 0.39);
   border-radius: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 .pokemon-image{
-  width: 85%;
+  width: 80%;
+  height: 200px;
+  transform: translate(15%,-35%);
+}
+.pokemon-image1{
+  width: 70%;
   height: 250px;
-  transform: translate(10%,-35%);
+  margin-top: 19%;
+  transform: translate(25%,-35%);
 }
 .card-text{
   font-family:'Courier New', Courier, monospace;
@@ -204,6 +231,9 @@ width: 8%;
   .App{
     padding: 0px;
   }
+  .theme{
+  display: none;
+  }
   .navbar-brand{
     transform: translate(0, 10%);
     width: 25%;
@@ -220,6 +250,12 @@ width: 8%;
   .list-page{
     padding-top: 30%;
   }
+  .pokemon-image1{
+    width: 70%;
+    height: 250px;
+    margin-top: 40%;
+    transform: translate(25%,-35%);
+  }
 }
 
 /* End of list page */
@@ -231,25 +267,28 @@ width: 8%;
 .poke-gradient{
   width: auto;
   height: 35%;
-  background-color: aliceblue;
-  border-radius: 10px;
-  margin: 10px;
- 
+
 }
-.mod-image{
-  
-}
+
 .tabs{
-background-color: #dcdcdc;
+background-color: rgb(223, 223, 223);
 width: 50%;
-margin-top: 5%;
+/* margin-top: 20%; */
 margin-left: 25%;
 margin-right: 25%;
+bottom: 0;
 border-radius: 25px;
 padding: 5px;
+position: fixed;
+}
+.tb{
+background-color: #ffffff;
+width: 100%;
+height: 60px;
+bottom: 0;
+position: fixed;
 }
 .stat-name{
-
 text-align: right !important;
 }
 .tab{
@@ -258,12 +297,54 @@ text-align: right !important;
 .tab-panel{
   text-align: center;
 }
+.badge{
+  margin-right: 10px;
+   background-color:rgb(223, 223, 223);
+  color:black
+}
 .p{
   margin-left: 40px;
+  font-weight: bold;
+}
+.type-ablty{
+  /* border-bottom: 1px solid gray; */
+  height: 50px;
+  background-image:linear-gradient(to right,  rgba(232, 232, 232, 0.573), rgb(255, 255, 255), rgba(223, 223, 223, 0.573));
+  box-shadow: 12px 2px 10px 12px  rgba(223, 223, 223, 0.573);
+  padding: 5px;
+  margin: 30px;
+  font-weight: bold;
+  
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.css-a5mhaz {
+  padding: 0px !important;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.card-text1{
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bolder;
+  font-size: xx-large;
+  margin-top: 40px;
+}
+.hrz-ln{
+  margin: 30px;
+  border-color: rgb(186, 186, 186);
+}
+.css-lw7sf2[aria-selected=true], .css-lw7sf2[data-selected] {
+  color: #000000 !important;
+  background: #ffffff !important; 
+}
+.css-1js79sa {
+  
+  --drawer-bg: rgb(245, 245, 245) !important;
+  --drawer-box-shadow: var(--chakra-shadows-lg);
+
 }
 @media (max-width: 768px) {
   .tabs{
-    background-color: #dcdcdc;
+    background-color: rgb(223, 223, 223);
     width: 90%;
     margin: 5% !important;
     margin-top: 10% !important;
@@ -271,3 +352,4 @@ text-align: right !important;
     padding: 5px;
     }
 }
+

@@ -24,14 +24,15 @@ import Card from './Card';
 
 function ListView() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const number = useState(0);
-  const [pageNumber, setPageNumber] = useState('8');
+  const [number, setNumber] = useState('8');
+  const [pageNumber, setPageNumber] = React.useState('8');
   const [pokemonInfo, setPokemonInfo] = useState([]);
   const [pokeData, setPokeData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [url, setUrl] = useState(`${Endpoint}pokemon/?limit=${pageNumber}`);
+  const [url, setUrl] = React.useState(`${Endpoint}pokemon/?limit=${pageNumber}`);
   const [nxtUrl, setNxtUrl] = useState();
   const [prevUrl, setPrevUrl] = useState();
+  const [getColor, setGetColor] = useState('#E85382')
   const btnRef = React.useRef()
   useEffect(() => {
     getPokemons();
@@ -44,23 +45,39 @@ function ListView() {
     setPrevUrl(res.data.previous);
     getPokemon(res.data.results);
     setLoading(false);
-    setPageNumber(pageNumber);
-    // handleChange()
-    // console.log(pokeData);
   };
 
-  const handleChange = (e) => {
-    // const{name, value} = e.target;
-    setPageNumber(e.target.value)
+  const h = (e) => {
+    e.preventDefault();
+    setPageNumber(pageNumber)
+    getPokemons();
+
     console.log(pageNumber)
+    console.log(url)
   }
+  const colored = (navData) =>{
+    setGetColor(navData)
+    console.log(getColor)
+  }
+  const handleChange = async (event) => {
+    setPageNumber(event.target.value);
+    const res = await axios.get(`${Endpoint}pokemon/?limit=${pageNumber}`);
+    setPokeData([])
+    await getPokemon(res.data.results);
+    console.log(pageNumber)
+    console.log(`${Endpoint}pokemon/?limit=${pageNumber}`)
+    setNxtUrl(res.data.next);
+    setPrevUrl(res.data.previous);
+   
+
+  };
   const getPokemon = async (res) => {
     res.map(async (item) => {
       const result = await axios.get(item.url);
-      console.log(result.data);
+      // console.log(result.data);
       setPokeData(state => {
         state = [...state, result.data]
-        state.sort((a, b) => a.id > b.id ? 1 : -1)
+        state.sort((a, b) => a.id > b.id ? 1 : -1);
         return state;
       })
     })
@@ -70,13 +87,13 @@ function ListView() {
   return (
     <div className="Listview">
 
-      <NavBar></NavBar>
+      <NavBar colored={colored}></NavBar>
       <div className='bg-image'>
         {loading ? <Loader></Loader> :
           <div className='container list-page'>
             {/* <PokemonInfo data={pokemonInfo}></PokemonInfo> */}
             <div className='row'>
-              <Card pokemon={pokeData} infoPokemon={poke => setPokemonInfo(poke)}></Card>
+              <Card appear={getColor} pokemon={pokeData} infoPokemon={poke => setPokemonInfo(poke)}></Card>
 
               <div className='row'>
                 <div className='col-10'>
@@ -94,8 +111,9 @@ function ListView() {
                   </div>
                 </div>
                 <div className='col-2'>
-                  <select className="form-select-sm page-option" value={pageNumber} onChange={() => setPageNumber(pageNumber)} >
-                    <option value="8">8</option>
+                 
+                  <select className="form-select-sm page-option" value={pageNumber} onChange={handleChange}>
+                    <option  value="8">8</option>
                     <option value="12">12</option>
                     <option value="18">18</option>
                     <option value="24">24</option>
