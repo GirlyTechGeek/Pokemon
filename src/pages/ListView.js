@@ -1,29 +1,12 @@
 import '../App.css';
-import {
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  useDisclosure,
-  Input,
-  Button,
-  Stack,
-  Badge,
-  Spinner,
-} from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Endpoint from '../Components/Endpoint';
-import PokemonInfo from './PokemonInfo';
 import NavBar from './NavBar';
 import Loader from './Loader';
 import Card from './Card';
 
 function ListView() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const [number, setNumber] = useState('8');
   const [pageNumber, setPageNumber] = React.useState('8');
   const [pokemonInfo, setPokemonInfo] = useState([]);
@@ -33,7 +16,6 @@ function ListView() {
   const [nxtUrl, setNxtUrl] = useState();
   const [prevUrl, setPrevUrl] = useState();
   const [getColor, setGetColor] = useState('#E85382')
-  const btnRef = React.useRef()
   useEffect(() => {
     getPokemons();
   }, [url])
@@ -47,25 +29,16 @@ function ListView() {
     setLoading(false);
   };
 
-  const h = (e) => {
-    e.preventDefault();
-    setPageNumber(pageNumber)
-    getPokemons();
-
-    console.log(pageNumber)
-    console.log(url)
-  }
   const colored = (navData) =>{
     setGetColor(navData)
     console.log(getColor)
   }
   const handleChange = async (event) => {
     setPageNumber(event.target.value);
-    const res = await axios.get(`${Endpoint}pokemon/?limit=${pageNumber}`);
     setPokeData([])
+    const res = await axios.get(`${Endpoint}pokemon/?limit=${event.target.value}`);
+    // setUrl(res)
     await getPokemon(res.data.results);
-    console.log(pageNumber)
-    console.log(`${Endpoint}pokemon/?limit=${pageNumber}`)
     setNxtUrl(res.data.next);
     setPrevUrl(res.data.previous);
    
@@ -111,7 +84,6 @@ function ListView() {
                   </div>
                 </div>
                 <div className='col-2'>
-                 
                   <select className="form-select-sm page-option" value={pageNumber} onChange={handleChange}>
                     <option  value="8">8</option>
                     <option value="12">12</option>

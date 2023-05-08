@@ -11,10 +11,8 @@ import {
     Tab,
     TabPanels,
     TabPanel,
-    Progress,
     DrawerFooter,
 } from '@chakra-ui/react'
-import axios from 'axios';
 import { prominent } from 'color.js'
 
 
@@ -95,10 +93,10 @@ const Card = ({ pokemon, appear }) => {
                                                     <span >{statistics.stat.name}</span>
                                                 </div>
                                                 {/* <div className='col-4'> */}
-                                                    <div class="progress col-4" style={{'height': '3px','marginTop': '10px'}}>
-                                                        <div class="progress-bar" role="progressbar" style={{'width': `${statistics.base_stat}%`, 'backgroundColor': `${appear}`,}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                    {/* <Progress style={{ 'marginTop': '10px' }} value={statistics.base_stat} size='xs' colorScheme={appear} /> */}
+                                                <div class="progress col-4" style={{ 'height': '3px', 'marginTop': '10px' }}>
+                                                    <div class="progress-bar" role="progressbar" style={{ 'width': `${statistics.base_stat}%`, 'backgroundColor': `${appear}`, }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                {/* <Progress style={{ 'marginTop': '10px' }} value={statistics.base_stat} size='xs' colorScheme={appear} /> */}
 
                                                 {/* </div> */}
                                                 <div className='col-4' style={{ 'textAlign': 'left' }}>
